@@ -7,7 +7,15 @@
   <title>L-systems generator</title>
 </head>
 <body>
-  <canvas id="canvas" width="1200px" height="1200px" style="background-color: black"></canvas>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+  <canvas id="canvas" width="1300px" height="900px" style="background-color: lightgrey"></canvas>
+  <span id="stats">The shape rendered in:</span>
+  <script src="./src/shapes.js"></script>
   <script src="./src/index.js"></script>
 </body>
 </html>

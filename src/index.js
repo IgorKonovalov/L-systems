@@ -1,28 +1,19 @@
-// elements
-
-const canvas = document.getElementById('canvas')
-const cx = canvas.getContext('2d')
-
-// constants
-
-const cHeight = cx.canvas.height
-const cWidth = cx.canvas.width
-const stepLength = 3
-
+const stats = document.getElementById('stats')
 // initial settings
 
-const center = {
-  y: cHeight,
-  x: 0
-}
-cx.strokeStyle = 'red'
+cx.strokeStyle = 'blue'
 cx.globalAlpha = 1
-// Lshape object
 
-function Lshape(axiom, rules, angle) {
+// Lshape container object
+
+function Lshape({axiom, rules, angle, stepLength, center, iterations}, name) {
+  this.name = name
   this.axiom = axiom
   this.rules = rules
   this.angle = angle
+  this.stepLength = stepLength
+  this.center = center
+  this.iterations = iterations
   this.currentState = axiom
 }
 
@@ -40,32 +31,22 @@ Lshape.prototype.step = function() {
   this.currentState = nextStepArr.join('')
 }
 
+const shapeNames = Object.keys(SHAPES)
+const shape = new Lshape(SHAPES[shapeNames[2]], shapeNames[2])
+
 //
-// l-shapes:
+// DRAW
 //
 
-// koch shape:
-const kochAxiom = 'F'
-const kochRule = {
-  F: 'F-F+F+F-F'
-}
-const kochAngle = Math.PI / 2
-const kochShape = new Lshape(kochAxiom, [kochRule], kochAngle)
-
-// box fractal
-const boxAxiom = 'F-F-F-F'
-const boxRule = {
-  F: 'F-F+F+F-F'
-}
-const boxAngle = Math.PI / 2
-const boxShape = new Lshape(boxAxiom, [boxRule], boxAngle)
-
-// other box
-const otherShape = new Lshape('F+F+F+F', [{F: 'FF+F+F+F+FF'}], Math.PI / 2)
-
-const draw = (shape, center, stepLength, iterations) => {
-  console.log(shape)
+const draw = (
+  shape,
+  iterations = shape.iterations
+) => {
+  const now = Date.now()
   const angle = shape.angle
+  const center = shape.center
+  const stepLength = shape.stepLength
+
   for (let i = 0; i < iterations; i++) {
     shape.step()
   }
@@ -88,6 +69,7 @@ const draw = (shape, center, stepLength, iterations) => {
     }
   })
   cx.stroke()
+  stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
 }
 
-draw(otherShape, center, 7, 5)
+draw(shape)
