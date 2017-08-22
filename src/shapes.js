@@ -51,5 +51,35 @@ const SHAPES = {
       y: 3
     },
     iterations: 4
+  },
+  'koch snowflake': {
+    axiom: 'F++F++F',
+    rules: [
+      {
+        F: 'F-F++F-F'
+      }
+    ],
+    angle: Math.PI / 3,
+    stepLength: 2,
+    center: {
+      x: cWidth / 4,
+      y: cHeight / 1.6
+    },
+    iterations: 5
+  },
+  'Bourke Triangle': {
+    axiom: 'F+F+F',
+    rules: [
+      {
+        F: 'F-F+F'
+      }
+    ],
+    angle: 2 * Math.PI / 3,
+    stepLength: 15,
+    center: {
+      x: cWidth / 1.5,
+      y: cHeight / 1.85
+    },
+    iterations: 7
   }
 }

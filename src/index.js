@@ -1,4 +1,5 @@
 const stats = document.getElementById('stats')
+const selectShape = document.getElementById('selectShape')
 // initial settings
 
 cx.strokeStyle = 'blue'
@@ -32,21 +33,43 @@ Lshape.prototype.step = function() {
 }
 
 const shapeNames = Object.keys(SHAPES)
-const shape = new Lshape(SHAPES[shapeNames[2]], shapeNames[2])
+const randomShape = Math.ceil(Math.random() * shapeNames.length)
+const shape = new Lshape(
+  SHAPES[shapeNames[randomShape - 1]],
+  shapeNames[randomShape - 1]
+)
+
+for (let item in SHAPES) {
+  let option = document.createElement('option')
+  option.innerHTML = item
+  selectShape.appendChild(option)
+}
+
+selectShape.value = shapeNames[randomShape - 1]
+selectShape.addEventListener('change', () => {
+  const newShape = new Lshape(SHAPES[selectShape.value], selectShape.value)
+  setInitialState()
+  clearCanvas()
+  draw(newShape)
+})
 
 //
 // DRAW
 //
 
-const draw = (
-  shape,
-  iterations = shape.iterations
-) => {
+const setInitialState = () => cx.resetTransform()
+const clearCanvas = () => {
+  cx.beginPath()
+  cx.rect(0, 0, cx.canvas.width, cx.canvas.height)
+  cx.fillStyle = 'white'
+  cx.fill()
+}
+
+const draw = (shape, iterations = shape.iterations) => {
   const now = Date.now()
   const angle = shape.angle
   const center = shape.center
   const stepLength = shape.stepLength
-
   for (let i = 0; i < iterations; i++) {
     shape.step()
   }
@@ -71,5 +94,7 @@ const draw = (
   cx.stroke()
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
 }
+
+// initial draw
 
 draw(shape)
