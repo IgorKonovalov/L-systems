@@ -7,7 +7,10 @@ cx.globalAlpha = 1
 
 // Lshape container object
 
-function Lshape({axiom, rules, angle, stepLength, center, iterations}, name) {
+function Lshape(
+  {axiom, rules, angle, stepLength, center, iterations, initialAngle, closePath},
+  name
+) {
   this.name = name
   this.axiom = axiom
   this.rules = rules
@@ -15,6 +18,8 @@ function Lshape({axiom, rules, angle, stepLength, center, iterations}, name) {
   this.stepLength = stepLength
   this.center = center
   this.iterations = iterations
+  this.initialAngle = initialAngle
+  this.closePath = closePath
   this.currentState = axiom
 }
 
@@ -44,8 +49,8 @@ for (let item in SHAPES) {
   option.innerHTML = item
   selectShape.appendChild(option)
 }
+selectShape.value = String(shapeNames[randomShape - 1])
 
-selectShape.value = shapeNames[randomShape - 1]
 selectShape.addEventListener('change', () => {
   const newShape = new Lshape(SHAPES[selectShape.value], selectShape.value)
   setInitialState()
@@ -76,6 +81,9 @@ const draw = (shape, iterations = shape.iterations) => {
   const stepsArr = shape.currentState.split('')
   cx.beginPath()
   cx.translate(center.x, center.y)
+  if (shape.initialAngle) {
+    cx.rotate(shape.initialAngle)
+  }
   cx.moveTo(stepLength, 0)
   stepsArr.forEach(step => {
     switch (step) {
@@ -85,12 +93,27 @@ const draw = (shape, iterations = shape.iterations) => {
       case '-':
         cx.rotate(angle)
         break
+      case '[':
+        cx.save()
+        break
+      case ']':
+        cx.restore()
+        break
       case 'F':
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
         break
+      case 'f':
+        cx.moveTo(stepLength, 0)
+        cx.translate(stepLength, 0)
+      case 'X':
+        cx.translate(stepLength, 0)
+        break
     }
   })
+  if (typeof shape.closePath === 'undefined') {
+    cx.closePath()
+  }
   cx.stroke()
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
 }
