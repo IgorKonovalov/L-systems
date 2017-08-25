@@ -8,7 +8,16 @@ cx.globalAlpha = 1
 // Lshape container object
 
 function Lshape(
-  {axiom, rules, angle, stepLength, center, iterations, initialAngle, closePath},
+  {
+    axiom,
+    rules,
+    angle,
+    stepLength,
+    center,
+    iterations,
+    initialAngle,
+    closePath
+  },
   name
 ) {
   this.name = name
@@ -37,13 +46,19 @@ Lshape.prototype.step = function() {
   this.currentState = nextStepArr.join('')
 }
 
+Lshape.prototype.iterate = function() {
+  for (let i = 0; i < this.iterations; i++) {
+    this.step()
+  }
+}
+
 const shapeNames = Object.keys(SHAPES)
 const randomShape = Math.ceil(Math.random() * shapeNames.length)
 const shape = new Lshape(
   SHAPES[shapeNames[randomShape - 1]],
   shapeNames[randomShape - 1]
 )
-
+shape.iterate()
 for (let item in SHAPES) {
   let option = document.createElement('option')
   option.innerHTML = item
@@ -53,6 +68,7 @@ selectShape.value = String(shapeNames[randomShape - 1])
 
 selectShape.addEventListener('change', () => {
   const newShape = new Lshape(SHAPES[selectShape.value], selectShape.value)
+  newShape.iterate()
   setInitialState()
   clearCanvas()
   draw(newShape)
@@ -70,22 +86,18 @@ const clearCanvas = () => {
   cx.fill()
 }
 
-const draw = (shape, iterations = shape.iterations) => {
+const draw = shape => {
   const now = Date.now()
   const angle = shape.angle
   const center = shape.center
   const stepLength = shape.stepLength
-  for (let i = 0; i < iterations; i++) {
-    shape.step()
-  }
   const stepsArr = shape.currentState.split('')
-  cx.beginPath()
   cx.translate(center.x, center.y)
   if (shape.initialAngle) {
     cx.rotate(shape.initialAngle)
   }
   cx.moveTo(stepLength, 0)
-  stepsArr.forEach(step => {
+  stepsArr.forEach((step, i) => {
     switch (step) {
       case '+':
         cx.rotate(-angle)
@@ -100,8 +112,12 @@ const draw = (shape, iterations = shape.iterations) => {
         cx.restore()
         break
       case 'F':
+        cx.beginPath()
+        // cx.strokeStyle = `hsl(${i * 2}, 70%, 50%)`
+        cx.moveTo(0, 0)
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
+        cx.stroke()
         break
       case 'f':
         cx.moveTo(stepLength, 0)
