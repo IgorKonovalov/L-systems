@@ -161,7 +161,7 @@ const SHAPES = {
     iterations: 12,
     closePath: false
   },
-  'Hexagonal Gosper' : {
+  'Hexagonal Gosper': {
     id: 10,
     axiom: 'A',
     rules: [
@@ -179,4 +179,126 @@ const SHAPES = {
     iterations: 3,
     closePath: false
   },
+  'Square Serpinsky': {
+    id: 11,
+    axiom: 'F+XF+F+XF',
+    rules: [
+      {
+        X: 'XF-F+F-XF+F+XF-F+F-X'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 6,
+    center: {
+      x: cWidth / 2 - 100,
+      y: cHeight - 100
+    },
+    iterations: 5,
+    closePath: false
+  },
+  'Hilbert Curve': {
+    id: 12,
+    axiom: 'X',
+    rules: [
+      {
+        X: '-YF+XFX+FY-',
+        Y: '+XF-YFY-FX+'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 15,
+    center: {
+      x: cWidth / 2 - 300,
+      y: cHeight / 2 - 250
+    },
+    iterations: 5,
+    closePath: false
+  },
+  Board: {
+    id: 13,
+    axiom: 'F+F+F+F',
+    rules: [
+      {
+        F: 'FF+F+F+F+FF'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 10,
+    center: {
+      x: 30,
+      y: cHeight - 30
+    },
+    iterations: 4,
+    closePath: false
+  },
+  'Koch Curve': {
+    id: 14,
+    axiom: 'F+F+F+F',
+    rules: [
+      {
+        F: 'F+F-F-FF+F+F-F'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 5,
+    center: {
+      x: cWidth / 2 - 250,
+      y: cHeight / 2 + 150
+    },
+    iterations: 3,
+    closePath: false
+  },
+  'Quadratic Koch Island': {
+    id: 15,
+    axiom: 'F+F+F+F',
+    rules: [
+      {
+        F: 'F+F-F-FFF+F+F-F'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 5,
+    center: {
+      x: cWidth / 2 - 250,
+      y: cHeight / 2
+    },
+    iterations: 3,
+    closePath: false
+  },
+  'Quadratic Koch Island - 2': {
+    id: 16,
+    axiom: 'F+F+F+F',
+    rules: [
+      {
+        F: 'F-FF+FF+F+F-F-FF+F+F-F-FF-FF+F'
+      }
+    ],
+    angle: Math.PI / 2,
+    stepLength: 13,
+    center: {
+      x: 250,
+      y: cHeight / 2 + 250
+    },
+    iterations: 2,
+    closePath: false
+  },
+  'Serpinsky ArrowHead': {
+    id: 17,
+    axiom: 'YF',
+    rules: [
+      {
+        X: 'YF+XF+Y',
+        Y: 'XF-YF-X'
+      }
+    ],
+    angle: Math.PI / 3,
+    stepLength: 7,
+    center: {
+      x: cWidth - 250,
+      y: cHeight - 30
+    },
+    iterations: 7,
+    initialAngle: Math.PI,
+    closePath: false
+  }
 }
