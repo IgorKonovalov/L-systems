@@ -53,7 +53,7 @@ Lshape.prototype.iterate = function() {
 }
 
 const shapeNames = Object.keys(SHAPES)
-const randomShape = shapeNames.length // always the last for debugging
+const randomShape = Math.ceil(Math.random() * shapeNames.length)
 const shape = new Lshape(
   SHAPES[shapeNames[randomShape - 1]],
   shapeNames[randomShape - 1]
@@ -113,7 +113,7 @@ const draw = shape => {
         break
       case 'F':
         cx.beginPath()
-        cx.strokeStyle = `hsl(${i}, 90%, 50%)`
+        cx.strokeStyle = `hsl(${i / 30}, 90%, 50%)`
         cx.moveTo(0, 0)
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
@@ -122,6 +122,11 @@ const draw = shape => {
       case 'f':
         cx.moveTo(stepLength, 0)
         cx.translate(stepLength, 0)
+        break
+      case 'b':
+        cx.moveTo(stepLength, 0)
+        cx.translate(stepLength, 0)
+        break
     }
   })
   if (typeof shape.closePath === 'undefined') {
