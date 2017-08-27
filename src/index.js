@@ -4,8 +4,8 @@ cx.strokeStyle = 'blue'
 cx.globalAlpha = 1
 
 const state = {
-  canvasColor: 'white',
-  shapeColor: false
+  canvasColor: 'black',
+  shapeColor: true
 }
 
 // Lshape container object
@@ -39,11 +39,9 @@ Lshape.prototype.step = function() {
   const arrState = this.currentState.split('')
   const nextStepArr = arrState.map(el => {
     let res = el
-    this.rules.forEach(rule => {
-      if (rule[el]) {
-        return (res = rule[el])
-      }
-    })
+    if (this.rules[el]) {
+      return (res = this.rules[el])
+    }
     return res
   })
   this.currentState = nextStepArr.join('')
@@ -67,6 +65,9 @@ previewsArr.forEach(el => {
     el.classList.add('active')
   }
 })
+
+const arrToHTML = arr => {}
+
 //
 // DRAW
 //
@@ -108,9 +109,7 @@ const draw = (shape, state) => {
         break
       case 'F':
         cx.beginPath()
-        state.shapeColor
-          ? (cx.strokeStyle = `hsl(${i / 30}, 100%, 50%)`)
-          : ''
+        state.shapeColor ? (cx.strokeStyle = `hsl(${i / 30}, 100%, 50%)`) : ''
         cx.moveTo(0, 0)
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
@@ -131,6 +130,9 @@ const draw = (shape, state) => {
   }
   cx.stroke()
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
+  name.innerHTML = shape.name
+  axiom.value = shape.axiom
+  rules.value = arrToHTML(shape.rules)
 }
 
 // initial draw

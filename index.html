@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>L-systems generator</title>
   <link rel="stylesheet" href="./src/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
+
 <body>
   <div class="wrapper">
     <div class="imageList"></div>
     <div class="canvasWrapper">
-      <canvas id="canvas" width="1100px" height="900px"></canvas>
+      <canvas id="canvas" width="900px" height="900px"></canvas>
       <span id="stats"></span>
+    </div>
+    <div class="controls">
+      <h1 id="name"></h1>
+      <div class="controlsWrapper">
+        <span>Axiom: </span><input id="axiom" type="text">
+        <span>Rulesets: </span><textarea rows="6" id="rules"></textarea>
+        <div class="contentStyle">
+          <span>Canvas color: </span><input type="color" name="" id="canvasColor">
+          <span>Colorize shape? </span><input type="checkbox" name="" id="colorizeShape">
+        </div>
+      </div>
     </div>
   </div>
   <script src="./src/shapes.js"></script>
   <script src="./src/controls.js"></script>
   <script src="./src/index.js"></script>
 </body>
+
 </html>

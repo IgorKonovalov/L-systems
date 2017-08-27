@@ -1,5 +1,13 @@
 const imageContainer = document.getElementsByClassName('imageList')[0]
 const stats = document.getElementById('stats')
+const name = document.getElementById('name')
+
+// controls
+
+const axiom = document.getElementById('axiom')
+const rules = document.getElementById('rules')
+const canvasColor = document.getElementById('canvasColor')
+const colorize = document.getElementById('colorizeShape')
 
 const shapesNamesList = Object.keys(SHAPES)
 shapesNamesList.forEach((element, i) => {

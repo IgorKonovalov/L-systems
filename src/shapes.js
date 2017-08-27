@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas')
 const cx = canvas.getContext('2d')
 
 canvas.style.height = '900px'
-canvas.style.width = '1100px'
+canvas.style.width = '900px'
 // constants
 
 const cHeight = cx.canvas.height
@@ -12,11 +12,9 @@ const SHAPES = {
   'Koch Line': {
     id: 1,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F-F++F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F++F-F'
+    },
     angle: Math.PI / 3,
     stepLength: 3,
     center: {
@@ -29,11 +27,9 @@ const SHAPES = {
   'Quadratic Snowflake': {
     id: 2,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F-F+F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F+F+F-F'
+    },
     angle: Math.PI / 2,
     stepLength: 3,
     center: {
@@ -46,11 +42,9 @@ const SHAPES = {
   'Box fractal': {
     id: 3,
     axiom: 'F-F-F-F',
-    rules: [
-      {
-        F: 'F-F+F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F+F+F-F'
+    },
     angle: Math.PI / 2,
     stepLength: 11,
     center: {
@@ -62,11 +56,9 @@ const SHAPES = {
   'Koch snowflake': {
     id: 4,
     axiom: 'F++F++F',
-    rules: [
-      {
-        F: 'F-F++F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F++F-F'
+    },
     angle: Math.PI / 3,
     stepLength: 2,
     center: {
@@ -78,11 +70,9 @@ const SHAPES = {
   'Bourke Triangle': {
     id: 5,
     axiom: 'F+F+F',
-    rules: [
-      {
-        F: 'F-F+F'
-      }
-    ],
+    rules: {
+      F: 'F-F+F'
+    },
     angle: 2 * Math.PI / 3,
     stepLength: 15,
     center: {
@@ -94,11 +84,9 @@ const SHAPES = {
   Weed: {
     id: 6,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F[+F]F[-F]F'
-      }
-    ],
+    rules: {
+      F: 'F[+F]F[-F]F'
+    },
     angle: Math.PI / 7,
     stepLength: 1,
     center: {
@@ -111,12 +99,10 @@ const SHAPES = {
   Stick: {
     id: 7,
     axiom: 'X',
-    rules: [
-      {
-        F: 'FF',
-        X: 'F[+X]F[-X]+X'
-      }
-    ],
+    rules: {
+      F: 'FF',
+      X: 'F[+X]F[-X]+X'
+    },
     angle: Math.PI / 9,
     stepLength: 3,
     center: {
@@ -130,11 +116,9 @@ const SHAPES = {
   Crystal: {
     id: 8,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'FF+F++F+F'
-      }
-    ],
+    rules: {
+      F: 'FF+F++F+F'
+    },
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
@@ -146,12 +130,10 @@ const SHAPES = {
   'Dragon Curve': {
     id: 9,
     axiom: 'FX',
-    rules: [
-      {
-        X: 'X+YF+',
-        Y: '-FX-Y'
-      }
-    ],
+    rules: {
+      X: 'X+YF+',
+      Y: '-FX-Y'
+    },
     angle: Math.PI / 2,
     stepLength: 6,
     center: {
@@ -164,12 +146,10 @@ const SHAPES = {
   'Hexagonal Gosper': {
     id: 10,
     axiom: 'A',
-    rules: [
-      {
-        A: 'A+BF++BF-FA--FAFA-BF+',
-        B: '-FA+BFBF++BF+FA--FA-B'
-      }
-    ],
+    rules: {
+      A: 'A+BF++BF-FA--FAFA-BF+',
+      B: '-FA+BFBF++BF+FA--FA-B'
+    },
     angle: Math.PI / 3,
     stepLength: 25,
     center: {
@@ -182,11 +162,9 @@ const SHAPES = {
   'Square Serpinsky': {
     id: 11,
     axiom: 'F+XF+F+XF',
-    rules: [
-      {
-        X: 'XF-F+F-XF+F+XF-F+F-X'
-      }
-    ],
+    rules: {
+      X: 'XF-F+F-XF+F+XF-F+F-X'
+    },
     angle: Math.PI / 2,
     stepLength: 7,
     center: {
@@ -199,12 +177,10 @@ const SHAPES = {
   'Hilbert Curve': {
     id: 12,
     axiom: 'X',
-    rules: [
-      {
-        X: '-YF+XFX+FY-',
-        Y: '+XF-YFY-FX+'
-      }
-    ],
+    rules: {
+      X: '-YF+XFX+FY-',
+      Y: '+XF-YFY-FX+'
+    },
     angle: Math.PI / 2,
     stepLength: 14,
     center: {
@@ -217,11 +193,9 @@ const SHAPES = {
   Board: {
     id: 13,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'FF+F+F+F+FF'
-      }
-    ],
+    rules: {
+      F: 'FF+F+F+F+FF'
+    },
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
@@ -234,11 +208,9 @@ const SHAPES = {
   'Koch Curve': {
     id: 14,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'F+F-F-FF+F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F+F-F-FF+F+F-F'
+    },
     angle: Math.PI / 2,
     stepLength: 5,
     center: {
@@ -251,11 +223,9 @@ const SHAPES = {
   'Quadratic Koch Island': {
     id: 15,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'F+F-F-FFF+F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F+F-F-FFF+F+F-F'
+    },
     angle: Math.PI / 2,
     stepLength: 5,
     center: {
@@ -268,11 +238,9 @@ const SHAPES = {
   'Quadratic Koch Island - 2': {
     id: 16,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'F-FF+FF+F+F-F-FF+F+F-F-FF-FF+F'
-      }
-    ],
+    rules: {
+      F: 'F-FF+FF+F+F-F-FF+F+F-F-FF-FF+F'
+    },
     angle: Math.PI / 2,
     stepLength: 13,
     center: {
@@ -285,12 +253,10 @@ const SHAPES = {
   'Serpinsky ArrowHead': {
     id: 17,
     axiom: 'YF',
-    rules: [
-      {
-        X: 'YF+XF+Y',
-        Y: 'XF-YF-X'
-      }
-    ],
+    rules: {
+      X: 'YF+XF+Y',
+      Y: 'XF-YF-X'
+    },
     angle: Math.PI / 3,
     stepLength: 7,
     center: {
@@ -304,11 +270,9 @@ const SHAPES = {
   Cross: {
     id: 18,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'F+F-F+F+F'
-      }
-    ],
+    rules: {
+      F: 'F+F-F+F+F'
+    },
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
@@ -321,11 +285,9 @@ const SHAPES = {
   Rings: {
     id: 19,
     axiom: 'F+F+F+F',
-    rules: [
-      {
-        F: 'FF+F+F+F+F+F-F'
-      }
-    ],
+    rules: {
+      F: 'FF+F+F+F+F+F-F'
+    },
     angle: Math.PI / 2,
     stepLength: 6,
     center: {
@@ -338,12 +300,10 @@ const SHAPES = {
   'Another Bush': {
     id: 20,
     axiom: 'Y',
-    rules: [
-      {
-        X: 'X[-FFF][+FFF]FX',
-        Y: 'YFX[+Y][-Y]'
-      }
-    ],
+    rules: {
+      X: 'X[-FFF][+FFF]FX',
+      Y: 'YFX[+Y][-Y]'
+    },
     angle: Math.PI / 7,
     stepLength: 6,
     center: {
@@ -357,11 +317,9 @@ const SHAPES = {
   'Another Bush - 2': {
     id: 21,
     axiom: 'F',
-    rules: [
-      {
-        F: 'FF+[+F-F-F]-[-F+F+F]'
-      }
-    ],
+    rules: {
+      F: 'FF+[+F-F-F]-[-F+F+F]'
+    },
     angle: Math.PI / 8,
     stepLength: 8,
     center: {
@@ -375,11 +333,9 @@ const SHAPES = {
   'Another Bush - 3': {
     id: 22,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F[+FF][-FF]F[-F][+F]F'
-      }
-    ],
+    rules: {
+      F: 'F[+FF][-FF]F[-F][+F]F'
+    },
     angle: Math.PI / 5,
     stepLength: 8,
     center: {
@@ -393,12 +349,10 @@ const SHAPES = {
   Hexagonal: {
     id: 23,
     axiom: 'FXF',
-    rules: [
-      {
-        F: 'FXF',
-        X: '[-F+F+F]+F-F-F+'
-      }
-    ],
+    rules: {
+      F: 'FXF',
+      X: '[-F+F+F]+F-F-F+'
+    },
     angle: Math.PI / 3,
     stepLength: 3,
     center: {
@@ -411,12 +365,10 @@ const SHAPES = {
   'Serpinsky Triangle': {
     id: 24,
     axiom: 'FXF--FF--FF',
-    rules: [
-      {
-        F: 'FF',
-        X: '--FXF++FXF++FXF--'
-      }
-    ],
+    rules: {
+      F: 'FF',
+      X: '--FXF++FXF++FXF--'
+    },
     angle: Math.PI / 3,
     stepLength: 4,
     center: {
@@ -429,11 +381,9 @@ const SHAPES = {
   'Serpinsky Carpet': {
     id: 25,
     axiom: 'F',
-    rules: [
-      {
-        F: 'FFF[+FFF+FFF+FFF]'
-      }
-    ],
+    rules: {
+      F: 'FFF[+FFF+FFF+FFF]'
+    },
     angle: Math.PI / 2,
     stepLength: 3,
     center: {
@@ -446,12 +396,10 @@ const SHAPES = {
   Mosaic: {
     id: 26,
     axiom: 'F-F-F-F',
-    rules: [
-      {
-        F: 'F-b+FF-F-FF-Fb-FF+b-FF+F+FF+Fb+FFF',
-        b: 'bbbbbb'
-      }
-    ],
+    rules: {
+      F: 'F-b+FF-F-FF-Fb-FF+b-FF+F+FF+Fb+FFF',
+      b: 'bbbbbb'
+    },
     angle: Math.PI / 2,
     stepLength: 3,
     center: {
@@ -464,11 +412,9 @@ const SHAPES = {
   'Levy C Curve': {
     id: 27,
     axiom: 'F++F++F++F',
-    rules: [
-      {
-        F: '-F++F-'
-      }
-    ],
+    rules: {
+      F: '-F++F-'
+    },
     angle: Math.PI / 4,
     stepLength: 5,
     center: {
@@ -481,11 +427,9 @@ const SHAPES = {
   Pentaplexity: {
     id: 28,
     axiom: 'F++F++F++F++F',
-    rules: [
-      {
-        F: 'F++F++F+++++F-F++F'
-      }
-    ],
+    rules: {
+      F: 'F++F++F+++++F-F++F'
+    },
     angle: Math.PI / 5,
     stepLength: 4,
     center: {
@@ -498,11 +442,9 @@ const SHAPES = {
   'William McWorter Terdragon': {
     id: 29,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F+F-F'
+    },
     angle: 2 * Math.PI / 3,
     stepLength: 6,
     center: {
@@ -516,12 +458,10 @@ const SHAPES = {
   'William McWorter  Sierpinski Carpet': {
     id: 30,
     axiom: 'F',
-    rules: [
-      {
-        F: 'F+F-F-F-b+F+F+F-F',
-        b: 'bbb'
-      }
-    ],
+    rules: {
+      F: 'F+F-F-F-b+F+F+F-F',
+      b: 'bbb'
+    },
     angle: Math.PI / 2,
     stepLength: 7,
     center: {
@@ -535,11 +475,9 @@ const SHAPES = {
   'William McWorter Pentigree': {
     id: 31,
     axiom: 'F-F-F-F-F',
-    rules: [
-      {
-        F: 'F-F++F+F-F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F++F+F-F-F'
+    },
     angle: 2 * Math.PI / 5,
     stepLength: 7,
     center: {
@@ -552,12 +490,10 @@ const SHAPES = {
   'Gary Teachout Hex-7-b': {
     id: 32,
     axiom: 'X',
-    rules: [
-      {
-        X: '-F++F-X-F--F+Y---F--F+Y+F++F-X+++F++F-X-F++F-X+++F--F+Y--',
-        Y: '+F++F-X-F--F+Y+F--F+Y---F--F+Y---F++F-X+++F++F-X+++F--F+Y'
-      }
-    ],
+    rules: {
+      X: '-F++F-X-F--F+Y---F--F+Y+F++F-X+++F++F-X-F++F-X+++F--F+Y--',
+      Y: '+F++F-X-F--F+Y+F--F+Y---F--F+Y---F++F-X+++F++F-X+++F--F+Y'
+    },
     angle: Math.PI / 6,
     stepLength: 2,
     center: {
@@ -570,12 +506,10 @@ const SHAPES = {
   'Gary Teachout Peano-c': {
     id: 33,
     axiom: 'FX',
-    rules: [
-      {
-        X: 'FX-FY-FX+FY+FX+FY+FX+FY+FX-FY-FX-FY-FX-FY-FX+FY+FX',
-        Y: 'FY'
-      }
-    ],
+    rules: {
+      X: 'FX-FY-FX+FY+FX+FY+FX+FY+FX-FY-FX-FY-FX-FY-FX+FY+FX',
+      Y: 'FY'
+    },
     angle: Math.PI / 4,
     stepLength: 3,
     center: {
@@ -588,12 +522,10 @@ const SHAPES = {
   'William McWorter Border1': {
     id: 34,
     axiom: 'XYXYXYX+​XYXYXYX+​XYXYXYX+​XYXYXYX',
-    rules: [
-      {
-        X: 'FX+FX+FXFY-FY-',
-        Y: '+FX+FXFY-FY-FY'
-      }
-    ],
+    rules: {
+      X: 'FX+FX+FXFY-FY-',
+      Y: '+FX+FXFY-FY-FY'
+    },
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
@@ -606,11 +538,9 @@ const SHAPES = {
   'Adrian Mariano Doily': {
     id: 35,
     axiom: 'F--F--F--F--F--F',
-    rules: [
-      {
-        F: '-F[--F--F]++F--F+'
-      }
-    ],
+    rules: {
+      F: '-F[--F--F]++F--F+'
+    },
     angle: Math.PI / 6,
     stepLength: 8,
     center: {
@@ -622,11 +552,9 @@ const SHAPES = {
   'William McWorter Maze01': {
     id: 36,
     axiom: 'F+F+F',
-    rules: [
-      {
-        F: 'F+FF-F'
-      }
-    ],
+    rules: {
+      F: 'F+FF-F'
+    },
     angle: 2 * Math.PI / 3,
     stepLength: 8,
     center: {
@@ -638,12 +566,10 @@ const SHAPES = {
   'William McWorter Maze&Fractal1': {
     id: 37,
     axiom: 'X',
-    rules: [
-      {
-        X: 'FY+FYFY-FY',
-        Y: 'FX-FXFX+FX'
-      }
-    ],
+    rules: {
+      X: 'FY+FYFY-FY',
+      Y: 'FX-FXFX+FX'
+    },
     angle: 2 * Math.PI / 3,
     stepLength: 2,
     center: {
@@ -655,12 +581,10 @@ const SHAPES = {
   'William McWorter Moore': {
     id: 38,
     axiom: 'X',
-    rules: [
-      {
-        X: 'FX+FX+FXFYFX+FXFY-FY-FY-',
-        Y: '+FX+FX+FXFY-FYFXFY-FY-FY'
-      }
-    ],
+    rules: {
+      X: 'FX+FX+FXFYFX+FXFY-FY-FY-',
+      Y: '+FX+FX+FXFY-FYFXFY-FY-FY'
+    },
     angle: Math.PI / 2,
     stepLength: 2,
     center: {
@@ -672,12 +596,10 @@ const SHAPES = {
   'William McWorter Pentan': {
     id: 39,
     axiom: 'X-X-X-X-X',
-    rules: [
-      {
-        X: 'FX-FX-FX+FY+FY+FX-FX',
-        Y: 'FY+FY-FX-FX-FY+FY+FY'
-      }
-    ],
+    rules: {
+      X: 'FX-FX-FX+FY+FY+FX-FX',
+      Y: 'FY+FY-FX-FX-FY+FY+FY'
+    },
     angle: 2 * Math.PI / 5,
     stepLength: 2,
     center: {
@@ -689,11 +611,9 @@ const SHAPES = {
   'William McWorter Pentl': {
     id: 40,
     axiom: 'F-F-F-F-F',
-    rules: [
-      {
-        F: 'F-F-F++F+F-F'
-      }
-    ],
+    rules: {
+      F: 'F-F-F++F+F-F'
+    },
     angle: 2 * Math.PI / 5,
     stepLength: 2,
     center: {
@@ -705,12 +625,10 @@ const SHAPES = {
   'William McWorter Sierpinsk': {
     id: 41,
     axiom: 'L--F--L--F',
-    rules: [
-      {
-        L: '+R-F-R+',
-        R: '-L+F+L-'
-      }
-    ],
+    rules: {
+      L: '+R-F-R+',
+      R: '-L+F+L-'
+    },
     angle: Math.PI / 4,
     stepLength: 6,
     center: {
@@ -722,11 +640,9 @@ const SHAPES = {
   'Anthony Hanmer ADH231a ': {
     id: 42,
     axiom: 'F++++F',
-    rules: [
-      {
-        F: 'F+F+F++++F+F+F'
-      }
-    ],
+    rules: {
+      F: 'F+F+F++++F+F+F'
+    },
     angle: Math.PI / 4,
     stepLength: 6,
     center: {
@@ -738,11 +654,9 @@ const SHAPES = {
   'Anthony Hanmer ADH256a': {
     id: 43,
     axiom: 'F+F+F+F++F-F-F-F',
-    rules: [
-      {
-        F: 'F+F++F+FF'
-      }
-    ],
+    rules: {
+      F: 'F+F++F+FF'
+    },
     angle: Math.PI / 2,
     stepLength: 6,
     center: {
@@ -754,11 +668,9 @@ const SHAPES = {
   'Anthony Hanmer ADH258a': {
     id: 44,
     axiom: 'F++F++F+++F--F--F',
-    rules: [
-      {
-        F: 'FF++F++F++FFF'
-      }
-    ],
+    rules: {
+      F: 'FF++F++F++FFF'
+    },
     angle: Math.PI / 3,
     stepLength: 10,
     center: {
