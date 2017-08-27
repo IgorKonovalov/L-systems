@@ -52,11 +52,14 @@ previewsArr.forEach(preview => {
 })
 
 controls.forEach(control =>
-  control.addEventListener('input', e => {
+  control.addEventListener(control === colorize ? 'click' : 'input', e => {
     previewsArr.forEach(el => el.classList.remove('active'))
     const newRules = htmlToJson(rules.value)
-    if (iterations.value > 15) {
+    if (iterations.value > 15 ) {
       warning.innerHTML = 'too many iterations, please use < 15'
+      return
+    } else if (stepLength == '') {
+      warning.innerHTML = 'pleace provide step value'
       return
     }
     warning.innerHTML = ''
@@ -64,7 +67,7 @@ controls.forEach(control =>
       id: Infinity,
       axiom: axiom.value,
       rules: newRules,
-      angle: (angle.value),
+      angle: angle.value,
       stepLength: stepLength.value,
       center: {
         x: centerX.value,
@@ -73,7 +76,28 @@ controls.forEach(control =>
       initialAngle: initialAngle.value || 0,
       iterations: iterations.value
     }
+    Object.assign(state, {
+      canvasColor: canvasColor.value,
+      shapeColor: colorize.checked
+    })
 
     drawFromControls(newShapeObject)
   })
 )
+
+// dragging attempt
+let draggin = false
+canvas.addEventListener('mousedown', () => {
+  draggin = true
+  console.log('draggin start!')
+})
+canvas.addEventListener('mouseup', () => {
+  draggin = false
+  console.log('draggin finish')
+})
+
+canvas.addEventListener('mousemove', () => {
+  if (draggin) {
+    console.log('its happening!')
+  }
+})

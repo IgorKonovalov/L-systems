@@ -4,8 +4,8 @@ cx.strokeStyle = 'blue'
 cx.globalAlpha = 1
 
 const state = {
-  canvasColor: 'black',
-  shapeColor: true
+  canvasColor: 'white',
+  shapeColor: false
 }
 
 // Lshape container object
@@ -69,7 +69,7 @@ previewsArr.forEach(el => {
 const jsonToHTML = rules => {
   let res = ''
   const keys = Object.keys(rules)
-  keys.forEach(key => res += `${key} => ${rules[key]}\n`)
+  keys.forEach(key => (res += `${key} => ${rules[key]}\n`))
   return res
 }
 
@@ -90,7 +90,7 @@ const updateControls = (shape, now) => {
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
   name.innerHTML = shape.name
   axiom.value = shape.axiom
-  angle.value = (shape.angle)
+  angle.value = shape.angle
   rules.value = jsonToHTML(shape.rules)
   centerX.value = shape.center.x
   centerY.value = shape.center.y
@@ -141,7 +141,9 @@ const draw = (shape, state) => {
         break
       case 'F':
         cx.beginPath()
-        state.shapeColor ? (cx.strokeStyle = `hsl(${i / 30}, 100%, 50%)`) : ''
+        state.shapeColor
+          ? (cx.strokeStyle = `hsl(${i / 30}, 100%, 50%)`)
+          : (cx.strokeStyle = 'blue')
         cx.moveTo(0, 0)
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
