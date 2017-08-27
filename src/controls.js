@@ -55,7 +55,7 @@ controls.forEach(control =>
   control.addEventListener(control === colorize ? 'click' : 'input', e => {
     previewsArr.forEach(el => el.classList.remove('active'))
     const newRules = htmlToJson(rules.value)
-    if (iterations.value > 15 ) {
+    if (iterations.value > 15) {
       warning.innerHTML = 'too many iterations, please use < 15'
       return
     } else if (stepLength == '') {
@@ -87,17 +87,27 @@ controls.forEach(control =>
 
 // dragging attempt
 let draggin = false
-canvas.addEventListener('mousedown', () => {
+const mouseCoord = {}
+canvas.addEventListener('mousedown', e => {
   draggin = true
-  console.log('draggin start!')
+  Object.assign(mouseCoord, {
+    x: e.offsetX,
+    y: e.offsetY
+  })
 })
 canvas.addEventListener('mouseup', () => {
   draggin = false
-  console.log('draggin finish')
+  Object.assign(mouseCoord, {
+    x: 0,
+    y: 0
+  })
 })
 
-canvas.addEventListener('mousemove', () => {
+canvas.addEventListener('mousemove', e => {
   if (draggin) {
-    console.log('its happening!')
+    draw(tempObject, state, {
+      x: mouseCoord.x - e.offsetX,
+      y: mouseCoord.y - e.offsetY
+    })
   }
 })

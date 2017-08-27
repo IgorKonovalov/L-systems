@@ -8,6 +8,8 @@ const state = {
   shapeColor: false
 }
 
+let tempObject
+
 // Lshape container object
 
 function Lshape(
@@ -105,26 +107,31 @@ const updateControls = (shape, now) => {
 //
 
 const setInitialState = () => cx.resetTransform()
-const clearCanvas = color => {
-  cx.beginPath()
-  cx.rect(0, 0, cx.canvas.width, cx.canvas.height)
-  cx.fillStyle = color
-  cx.fill()
-}
+const clearCanvas = color =>
+  cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height)
 
-const draw = (shape, state) => {
+const draw = (shape, state, dragState) => {
   const now = Date.now()
-  setInitialState()
-  clearCanvas(state.canvasColor)
-  const angle = shape.angle
   const center = shape.center
   const stepLength = shape.stepLength
-  const stepsArr = shape.currentState.split('')
+  setInitialState()
+  clearCanvas(state.canvasColor)
   cx.translate(center.x, center.y)
+  if (typeof dragState === 'undefined') {
+    cx.moveTo(stepLength, 0)
+  } else {
+    cx.translate(stepLength - dragState.x, -dragState.y)
+    tempObject.center = {
+      x: - dragState.x,
+      y: - dragState.y
+    }
+  }
+  const angle = shape.angle
+  const stepsArr = shape.currentState.split('')
+
   if (shape.initialAngle) {
     cx.rotate(shape.initialAngle)
   }
-  cx.moveTo(stepLength, 0)
   stepsArr.forEach((step, i) => {
     switch (step) {
       case '+':
@@ -167,7 +174,7 @@ const draw = (shape, state) => {
 }
 
 // initial draw
-
+tempObject = shape
 draw(shape, state)
 
 const drawFromPreview = elem => {
@@ -179,11 +186,13 @@ const drawFromPreview = elem => {
     }
   }
   shapeToDraw.iterate()
+  tempObject = shapeToDraw
   draw(shapeToDraw, state)
 }
 
 const drawFromControls = obj => {
   const shapeToDraw = new Lshape(obj, 'My shape')
   shapeToDraw.iterate()
+  tempObject = shapeToDraw
   draw(shapeToDraw, state)
 }
