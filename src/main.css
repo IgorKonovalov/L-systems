@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.canvasWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.imageList {
+  height: 900px;
+  align-self: center;
+  justify-content: center;
+  min-width: 175px;
+  overflow-y: auto;
+  margin-right: 10px;
+  flex-direction: column;
+}
+.shapePreview {
+  display: flex;
+  margin: auto;
+  margin-top: 5px
+}
+.active {
+  box-shadow: 0px 0px 10px 5px rgba(171,48,171,1); 
+}
+.select {
+  max-width: 100px;
+  position: absolute;
+  right: 150px;
+  top: 10px;
+}

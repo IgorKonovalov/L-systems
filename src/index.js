@@ -1,9 +1,12 @@
-const stats = document.getElementById('stats')
-const selectShape = document.getElementById('selectShape')
 // initial settings
 
 cx.strokeStyle = 'blue'
 cx.globalAlpha = 1
+
+const state = {
+  canvasColor: 'white',
+  shapeColor: false
+}
 
 // Lshape container object
 
@@ -59,35 +62,27 @@ const shape = new Lshape(
   shapeNames[randomShape - 1]
 )
 shape.iterate()
-for (let item in SHAPES) {
-  let option = document.createElement('option')
-  option.innerHTML = item
-  selectShape.appendChild(option)
-}
-selectShape.value = String(shapeNames[randomShape - 1])
-
-selectShape.addEventListener('change', () => {
-  const newShape = new Lshape(SHAPES[selectShape.value], selectShape.value)
-  newShape.iterate()
-  setInitialState()
-  clearCanvas()
-  draw(newShape)
+previewsArr.forEach(el => {
+  if (el.getAttribute('data-id') == SHAPES[shapeNames[randomShape - 1]].id) {
+    el.classList.add('active')
+  }
 })
-
 //
 // DRAW
 //
 
 const setInitialState = () => cx.resetTransform()
-const clearCanvas = () => {
+const clearCanvas = color => {
   cx.beginPath()
   cx.rect(0, 0, cx.canvas.width, cx.canvas.height)
-  cx.fillStyle = 'white'
+  cx.fillStyle = color
   cx.fill()
 }
 
-const draw = shape => {
+const draw = (shape, state) => {
   const now = Date.now()
+  setInitialState()
+  clearCanvas(state.canvasColor)
   const angle = shape.angle
   const center = shape.center
   const stepLength = shape.stepLength
@@ -113,7 +108,9 @@ const draw = shape => {
         break
       case 'F':
         cx.beginPath()
-        cx.strokeStyle = `hsl(${i / 30}, 90%, 50%)`
+        state.shapeColor
+          ? (cx.strokeStyle = `hsl(${i / 30}, 100%, 50%)`)
+          : ''
         cx.moveTo(0, 0)
         cx.lineTo(stepLength, 0)
         cx.translate(stepLength, 0)
@@ -138,4 +135,16 @@ const draw = shape => {
 
 // initial draw
 
-draw(shape)
+draw(shape, state)
+
+const updateDraw = elem => {
+  const id = elem.getAttribute('data-id')
+  let shapeToDraw
+  for (let shape in SHAPES) {
+    if (SHAPES[shape].id == id) {
+      shapeToDraw = new Lshape(SHAPES[shape], shape)
+    }
+  }
+  shapeToDraw.iterate()
+  draw(shapeToDraw, state)
+}

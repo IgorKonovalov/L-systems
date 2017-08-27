@@ -5,27 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>L-systems generator</title>
+  <link rel="stylesheet" href="./src/main.css">
 </head>
 <body>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    .select {
-      max-width: 100px;
-      position: absolute;
-      right: 50px;
-      top: 10px;
-    }
-  </style>
-  <canvas id="canvas" width="1300px" height="900px" style="background-color: white"></canvas>
-  <span id="stats"></span>
-  <div class="select">
-      <span>Choose shape!</span>
-      <select id="selectShape"/>  
+  <div class="wrapper">
+    <div class="imageList"></div>
+    <div class="canvasWrapper">
+      <canvas id="canvas" width="1300px" height="900px"></canvas>
+      <span id="stats"></span>
+    </div>
   </div>
   <script src="./src/shapes.js"></script>
+  <script src="./src/controls.js"></script>
   <script src="./src/index.js"></script>
 </body>
 </html>
