@@ -66,7 +66,39 @@ previewsArr.forEach(el => {
   }
 })
 
-const arrToHTML = arr => {}
+const jsonToHTML = rules => {
+  let res = ''
+  const keys = Object.keys(rules)
+  keys.forEach(key => res += `${key} => ${rules[key]}\n`)
+  return res
+}
+
+const htmlToJson = html => {
+  let res = {}
+  let stringsArr = html.trim().split('\n')
+  stringsArr.forEach(str => {
+    let rule = str.split('=>')
+    res[rule[0].trim()] = rule[1].trim()
+  })
+  return res
+}
+
+const degToRad = deg => Math.round(deg * Math.PI / 18) / 10
+const radToDeg = (rad = 0) => 180 * rad / Math.PI
+
+const updateControls = (shape, now) => {
+  stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
+  name.innerHTML = shape.name
+  axiom.value = shape.axiom
+  angle.value = (shape.angle)
+  rules.value = jsonToHTML(shape.rules)
+  centerX.value = shape.center.x
+  centerY.value = shape.center.y
+  iterations.value = shape.iterations
+  initialAngle.value = shape.initialAngle || ''
+  stepLength.value = shape.stepLength
+  toDeg.innerHTML = `in deg: ${Math.round(radToDeg(shape.angle))}`
+}
 
 //
 // DRAW
@@ -129,17 +161,14 @@ const draw = (shape, state) => {
     cx.closePath()
   }
   cx.stroke()
-  stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
-  name.innerHTML = shape.name
-  axiom.value = shape.axiom
-  rules.value = arrToHTML(shape.rules)
+  updateControls(shape, now)
 }
 
 // initial draw
 
 draw(shape, state)
 
-const updateDraw = elem => {
+const drawFromPreview = elem => {
   const id = elem.getAttribute('data-id')
   let shapeToDraw
   for (let shape in SHAPES) {
@@ -147,6 +176,12 @@ const updateDraw = elem => {
       shapeToDraw = new Lshape(SHAPES[shape], shape)
     }
   }
+  shapeToDraw.iterate()
+  draw(shapeToDraw, state)
+}
+
+const drawFromControls = obj => {
+  const shapeToDraw = new Lshape(obj, 'My shape')
   shapeToDraw.iterate()
   draw(shapeToDraw, state)
 }
