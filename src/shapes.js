@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas')
 const cx = canvas.getContext('2d')
 
 canvas.style.height = '900px'
-canvas.style.width = '1300px'
+canvas.style.width = '1100px'
 // constants
 
 const cHeight = cx.canvas.height
@@ -18,7 +18,7 @@ const SHAPES = {
       }
     ],
     angle: Math.PI / 3,
-    stepLength: 5,
+    stepLength: 3,
     center: {
       x: 0,
       y: 10
@@ -35,7 +35,7 @@ const SHAPES = {
       }
     ],
     angle: Math.PI / 2,
-    stepLength: 5,
+    stepLength: 3,
     center: {
       x: 0,
       y: 10
@@ -86,7 +86,7 @@ const SHAPES = {
     angle: 2 * Math.PI / 3,
     stepLength: 15,
     center: {
-      x: cWidth / 1.5,
+      x: cWidth - 65,
       y: cHeight / 1.85
     },
     iterations: 7
@@ -138,8 +138,8 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
-      x: 20,
-      y: cHeight - 20
+      x: 50,
+      y: cHeight - 50
     },
     iterations: 4
   },
@@ -153,7 +153,7 @@ const SHAPES = {
       }
     ],
     angle: Math.PI / 2,
-    stepLength: 4,
+    stepLength: 6,
     center: {
       x: cWidth / 2,
       y: cHeight / 2
@@ -173,7 +173,7 @@ const SHAPES = {
     angle: Math.PI / 3,
     stepLength: 25,
     center: {
-      x: cWidth / 2 - 50,
+      x: cWidth / 2,
       y: cHeight / 2 + 230
     },
     iterations: 3,
@@ -188,10 +188,10 @@ const SHAPES = {
       }
     ],
     angle: Math.PI / 2,
-    stepLength: 6,
+    stepLength: 7,
     center: {
-      x: cWidth / 2 - 100,
-      y: cHeight - 100
+      x: cWidth / 2,
+      y: cHeight
     },
     iterations: 5,
     closePath: false
@@ -206,12 +206,12 @@ const SHAPES = {
       }
     ],
     angle: Math.PI / 2,
-    stepLength: 15,
+    stepLength: 14,
     center: {
-      x: cWidth / 2 - 300,
-      y: cHeight / 2 - 250
+      x: 10,
+      y: 10
     },
-    iterations: 5,
+    iterations: 6,
     closePath: false
   },
   Board: {
@@ -225,8 +225,8 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
-      x: 30,
-      y: cHeight - 30
+      x: 50,
+      y: cHeight - 50
     },
     iterations: 4,
     closePath: false
@@ -242,7 +242,7 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 5,
     center: {
-      x: cWidth / 2 - 250,
+      x: cWidth / 2 - 150,
       y: cHeight / 2 + 150
     },
     iterations: 3,
@@ -276,7 +276,7 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 13,
     center: {
-      x: 250,
+      x: 200,
       y: cHeight / 2 + 250
     },
     iterations: 2,
@@ -294,7 +294,7 @@ const SHAPES = {
     angle: Math.PI / 3,
     stepLength: 7,
     center: {
-      x: cWidth - 250,
+      x: cWidth - 10,
       y: cHeight - 30
     },
     iterations: 7,
@@ -312,7 +312,7 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
-      x: 150,
+      x: 70,
       y: cHeight / 2 + 120
     },
     iterations: 5,
@@ -329,7 +329,7 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 6,
     center: {
-      x: cWidth / 2,
+      x: cWidth / 2 + 180,
       y: cHeight - 100
     },
     iterations: 4,
@@ -437,8 +437,8 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 3,
     center: {
-      x: 0,
-      y: cHeight
+      x: 50,
+      y: cHeight - 50
     },
     iterations: 5,
     closePath: false
@@ -472,7 +472,7 @@ const SHAPES = {
     angle: Math.PI / 4,
     stepLength: 5,
     center: {
-      x: cWidth / 2 - 150,
+      x: cWidth / 2 - 130,
       y: cHeight / 2 + 150
     },
     iterations: 11,
@@ -506,7 +506,7 @@ const SHAPES = {
     angle: 2 * Math.PI / 3,
     stepLength: 6,
     center: {
-      x: cWidth / 2,
+      x: cWidth / 2 + 100,
       y: cHeight / 2
     },
     iterations: 8,
@@ -561,7 +561,7 @@ const SHAPES = {
     angle: Math.PI / 6,
     stepLength: 2,
     center: {
-      x: cWidth / 2 + 100,
+      x: cWidth / 2 + 150,
       y: 100
     },
     iterations: 5,
@@ -597,7 +597,7 @@ const SHAPES = {
     angle: Math.PI / 2,
     stepLength: 10,
     center: {
-      x: 100,
+      x: 50,
       y: cHeight / 2 + 100
     },
     iterations: 3,
@@ -614,7 +614,7 @@ const SHAPES = {
     angle: Math.PI / 6,
     stepLength: 8,
     center: {
-      x: cWidth / 2,
+      x: cWidth / 2 + 50,
       y: 100
     },
     iterations: 4
@@ -681,7 +681,7 @@ const SHAPES = {
     angle: 2 * Math.PI / 5,
     stepLength: 2,
     center: {
-      x: cWidth / 2,
+      x: cWidth / 2 + 200,
       y: cHeight / 2 - 100
     },
     iterations: 4

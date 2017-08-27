@@ -4,10 +4,11 @@ const stats = document.getElementById('stats')
 const shapesNamesList = Object.keys(SHAPES)
 shapesNamesList.forEach((element, i) => {
   const image = document.createElement('img')
-  image.setAttribute('src', 'src/img/150x150.png')
+  const id = SHAPES[element].id
+  image.setAttribute('src', `src/img/${id}.png`)
   image.setAttribute('class', 'shapePreview')
-  image.setAttribute('data-id', SHAPES[element].id)
-  imageContainer.appendChild(image)
+  image.setAttribute('data-id', id)
+  imageContainer.appendChild(image) 
 });
 
 const previews = document.getElementsByClassName('shapePreview')
