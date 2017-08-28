@@ -107,8 +107,7 @@ const updateControls = (shape, now) => {
 //
 
 const setInitialState = () => cx.resetTransform()
-const clearCanvas = color =>
-  cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height)
+const clearCanvas = () => cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height)
 
 const draw = (shape, state, dragState) => {
   const now = Date.now()
@@ -116,15 +115,12 @@ const draw = (shape, state, dragState) => {
   const stepLength = shape.stepLength
   setInitialState()
   clearCanvas(state.canvasColor)
+  canvas.style.backgroundColor = state.canvasColor
   cx.translate(center.x, center.y)
   if (typeof dragState === 'undefined') {
     cx.moveTo(stepLength, 0)
   } else {
     cx.translate(stepLength - dragState.x, -dragState.y)
-    tempObject.center = {
-      x: - dragState.x,
-      y: - dragState.y
-    }
   }
   const angle = shape.angle
   const stepsArr = shape.currentState.split('')

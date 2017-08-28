@@ -95,8 +95,12 @@ canvas.addEventListener('mousedown', e => {
     y: e.offsetY
   })
 })
-canvas.addEventListener('mouseup', () => {
+canvas.addEventListener('mouseup', e => {
   draggin = false
+  tempObject.center = {
+    x: Number(tempObject.center.x - (mouseCoord.x - e.offsetX)),
+    y: Number(tempObject.center.y - (mouseCoord.y - e.offsetY))
+  }
   Object.assign(mouseCoord, {
     x: 0,
     y: 0
@@ -109,5 +113,7 @@ canvas.addEventListener('mousemove', e => {
       x: mouseCoord.x - e.offsetX,
       y: mouseCoord.y - e.offsetY
     })
+    centerX.value = tempObject.center.x - (mouseCoord.x - e.offsetX)
+    centerY.value = tempObject.center.y - (mouseCoord.y - e.offsetY)
   }
 })
