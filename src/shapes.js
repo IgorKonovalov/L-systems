@@ -678,5 +678,20 @@ const SHAPES = {
       y: cHeight / 2 + 200
     },
     iterations: 3
+  },
+  SaWeed: {
+    id: 45,
+    axiom: 'F',
+    rules: {
+      F: 'F[+FF-F]F[-FF]F'
+    },
+    angle: Math.PI / 7,
+    stepLength: 3,
+    center: {
+      x: cWidth / 2,
+      y: cHeight
+    },
+    iterations: 5,
+    initialAngle: -Math.PI / 2
   }
 }
