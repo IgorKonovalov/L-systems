@@ -10,7 +10,7 @@
   flex-direction: column;
 }
 #canvas {
-  cursor: hand;
+  cursor: grab;
 }
 .imageList {
   height: 900px;

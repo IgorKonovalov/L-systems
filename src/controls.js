@@ -1,6 +1,7 @@
 const imageContainer = document.getElementsByClassName('imageList')[0]
 const stats = document.getElementById('stats')
 const name = document.getElementById('name')
+const download = document.getElementById('download')
 
 // controls
 
@@ -55,10 +56,14 @@ controls.forEach(control =>
   control.addEventListener(control === colorize ? 'click' : 'input', e => {
     previewsArr.forEach(el => el.classList.remove('active'))
     const newRules = htmlToJson(rules.value)
+    if (control !== colorize && isNaN(control.value)) {
+      warning.innerHTML = 'provided value must be a number'
+      return
+    }
     if (iterations.value > 15) {
       warning.innerHTML = 'too many iterations, please use < 15'
       return
-    } else if (stepLength == '') {
+    } else if (stepLength.value == '') {
       warning.innerHTML = 'pleace provide step value'
       return
     }
@@ -80,7 +85,6 @@ controls.forEach(control =>
       canvasColor: canvasColor.value,
       shapeColor: colorize.checked
     })
-
     drawFromControls(newShapeObject)
   })
 )
@@ -90,6 +94,7 @@ let draggin = false
 const mouseCoord = {}
 canvas.addEventListener('mousedown', e => {
   draggin = true
+  canvas.style.cursor = 'move'
   Object.assign(mouseCoord, {
     x: e.offsetX,
     y: e.offsetY
@@ -97,6 +102,7 @@ canvas.addEventListener('mousedown', e => {
 })
 canvas.addEventListener('mouseup', e => {
   draggin = false
+  canvas.style.cursor = 'grab'
   tempObject.center = {
     x: Number(tempObject.center.x - (mouseCoord.x - e.offsetX)),
     y: Number(tempObject.center.y - (mouseCoord.y - e.offsetY))
@@ -105,6 +111,16 @@ canvas.addEventListener('mouseup', e => {
     x: 0,
     y: 0
   })
+})
+
+canvas.addEventListener('wheel', e => {
+  if (e.deltaY > 0) {
+    tempObject.stepLength = Number(tempObject.stepLength) + 0.1
+    draw(tempObject, state)
+  } else {
+    tempObject.stepLength = Number(tempObject.stepLength) - 0.1
+    draw(tempObject, state)
+  }
 })
 
 canvas.addEventListener('mousemove', e => {
@@ -117,3 +133,11 @@ canvas.addEventListener('mousemove', e => {
     centerY.value = tempObject.center.y - (mouseCoord.y - e.offsetY)
   }
 })
+
+download.addEventListener('click', () => {
+  const image = canvas
+    .toDataURL('image/png')
+    .replace('image/png', 'image/octet-stream')
+  download.setAttribute('href', image)
+})
+

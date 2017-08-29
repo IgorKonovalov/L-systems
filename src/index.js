@@ -90,6 +90,7 @@ const radToDeg = (rad = 0) => 180 * rad / Math.PI
 
 const updateControls = (shape, now) => {
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
+  download.setAttribute('download', `${shape.name.replace(/ /g, '_')}.png`)
   name.innerHTML = shape.name
   axiom.value = shape.axiom
   angle.value = shape.angle
@@ -98,7 +99,7 @@ const updateControls = (shape, now) => {
   centerY.value = shape.center.y
   iterations.value = shape.iterations
   initialAngle.value = shape.initialAngle || ''
-  stepLength.value = shape.stepLength
+  stepLength.value = Math.round(shape.stepLength * 10) / 10
   toDeg.innerHTML = `in deg: ${Math.round(radToDeg(shape.angle))}`
 }
 
