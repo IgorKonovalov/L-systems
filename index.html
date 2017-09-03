@@ -12,46 +12,50 @@
 
 <body>
   <div class="wrapper">
-    <div class="imageList"></div>
+    <div class="controls">
+      <h1 id="name"></h1>
+      <div class="controlsWrapper">
+          <div class="polish">
+          <div class="columnP">
+            <span>Axiom: </span>
+            <input id="axiom" type="text">
+          </div>
+          <div class="columnP">
+            <span>Angle (rad):</span>
+            <input id="angle" type="text">
+            <span id="toDeg"></span>
+          </div>          
+        </div>
+          <span>Rules: </span>
+          <textarea rows="6" id="rules"></textarea>
+          <div class="polish">
+          <div class="columnP">
+            X: <input type="text" id="X"> Iterations: <input type="text" id="iterations" maxlength="10"> Step Length:
+            <input type="text" id="stepLength">
+          </div>
+          <div class="columnP">
+            Y: <input type="text" id="Y"> Initial Angle (rad): <input type="text" id="initialAngle">
+          </div>
+          </div>
+          <span id="warning"></span>
+          <div class="contentStyle">
+          <span>Canvas color: </span>
+          <input type="color" name="" id="canvasColor" value="#ffffff">
+          <span>Colorize shape?</span>
+          <input type="checkbox" name="" id="colorizeShape">
+          </div>
+        </div>
+      </div>
     <div class="canvasWrapper">
       <canvas id="canvas" width="900px" height="900px"></canvas>
       <span id="stats"></span>
       <a id="download" href="#" download="image.png">Download Shape</a>
     </div>
-    <div class="controls">
-      <h1 id="name"></h1>
-      <div class="controlsWrapper">
-        <div class="polish">
-          <div class="columnP">
-            <span>Axiom: </span><input id="axiom" type="text">
-          </div>
-          <div class="columnP">
-            <span>Angle (rad): </span></span><input id="angle" type="text"><span id="toDeg">
-          </div>          
-        </div>
-        <span>Rules: </span><textarea rows="6" id="rules"></textarea>
-        <div class="polish">
-          <div class="columnP">
-            X: <input type="text" id="X">
-            Iterations: <input type="text" id="iterations" maxlength="10" >
-            Step Length: <input type="text" id="stepLength">
-          </div>
-          <div class="columnP">
-            Y: <input type="text" id="Y">
-            Initial Angle (rad): <input type="text" id="initialAngle">
-          </div>          
-        </div>
-        <span id="warning"></span>
-        <div class="contentStyle">
-          <span>Canvas color: </span><input type="color" name="" id="canvasColor" value="#ffffff">
-          <span>Colorize shape? </span><input type="checkbox" name="" id="colorizeShape">
-        </div>
-      </div>
-    </div>
+    <div class="imageList"></div>
+    <script src="./src/shapes.js"></script>
+    <script src="./src/controls.js"></script>
+    <script src="./src/index.js"></script>
   </div>
-  <script src="./src/shapes.js"></script>
-  <script src="./src/controls.js"></script>
-  <script src="./src/index.js"></script>
 </body>
 
 </html>

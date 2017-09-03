@@ -4,10 +4,13 @@
 .wrapper {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 .canvasWrapper {
   display: flex;
   flex-direction: column;
+  margin-left: auto;
+  margin-top: 1%;
 }
 #canvas {
   cursor: grab;
@@ -25,12 +28,14 @@
   font-family: 'Open Sans', sans-serif;  
   text-align: left;
   padding: 10px;
+  position: absolute;
   margin-left: auto;
   margin-right: 10px;
-  width: 400px;
-  min-width: 400px;
-  height: 520px;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);;   
+  min-width: 100px;
+  height: auto;
+  left: 1%;
+  top: 2%;
+  box-shadow: 8px 5px 14px -3px rgba(0, 0, 0, 0.75);  
 }
 .controlsWrapper {
   display: flex;
@@ -49,10 +54,10 @@
   flex-direction: column;
 }
 .contentStyle {
-  padding: 40px;
+  padding: 15px 0;
   margin-top: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 #name {
@@ -78,4 +83,7 @@
   position: absolute;
   right: 150px;
   top: 10px;
+}
+input {
+  margin-bottom: 15px; 
 }
