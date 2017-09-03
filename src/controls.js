@@ -17,6 +17,10 @@ const canvasColor = document.getElementById('canvasColor')
 const colorize = document.getElementById('colorizeShape')
 const toDeg = document.getElementById('toDeg')
 const warning = document.getElementById('warning')
+const openControls = document.getElementById('openControls')
+
+canvasColor.value = '#ffffff'
+colorize.checked = false
 
 const controls = [
   axiom,
@@ -56,7 +60,12 @@ controls.forEach(control =>
   control.addEventListener(control === colorize ? 'click' : 'input', e => {
     previewsArr.forEach(el => el.classList.remove('active'))
     const newRules = htmlToJson(rules.value)
-    if (control !== colorize && isNaN(control.value)) {
+    if (
+      control !== colorize &&
+      control !== canvasColor &&
+      control !== rules &&
+      isNaN(control.value)
+    ) {
       warning.innerHTML = 'provided value must be a number'
       return
     }
@@ -141,3 +150,31 @@ download.addEventListener('click', () => {
   download.setAttribute('href', image)
 })
 
+openControls.addEventListener('click', () => {
+  document
+    .getElementsByClassName('controls')[0]
+    .classList.toggle('showControls')
+})
+
+document.addEventListener('keypress', e => {
+  if (e.keyCode === 38) {
+    previewsArr.forEach(preview => {
+      if (preview.classList.contains('active') && preview.previousSibling) {
+        preview.classList.remove('active')
+        preview.previousSibling.scrollIntoView()        
+        preview.previousSibling.classList.add('active')
+        drawFromPreview(preview.previousSibling, state)
+      }
+    })
+  } else if (e.keyCode === 40) {
+    previewsArr.some(preview => {
+      if (preview.classList.contains('active')) {
+        preview.classList.remove('active')
+        preview.nextSibling.scrollIntoView()
+        preview.nextSibling.classList.add('active')
+        drawFromPreview(preview.nextSibling, state)
+        return true
+      }
+    })
+  }
+})
