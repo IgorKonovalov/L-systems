@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas')
 const cx = canvas.getContext('2d')
 
-canvas.style.height = '900px'
+canvas.height = document.body.offsetHeight - document.getElementById('download').offsetHeight - document.getElementById('stats').offsetHeight
 canvas.style.width = '900px'
 // constants
 

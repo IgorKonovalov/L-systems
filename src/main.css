@@ -16,7 +16,7 @@
   cursor: grab;
 }
 .imageList {
-  height: 900px;
+  height: 96vh;
   align-self: center;
   justify-content: center;
   min-width: 175px;
@@ -25,6 +25,7 @@
   flex-direction: column;
 }
 .controls {
+  display: none;
   font-family: 'Open Sans', sans-serif;  
   text-align: left;
   padding: 10px;
@@ -36,6 +37,13 @@
   left: 1%;
   top: 2%;
   box-shadow: 8px 5px 14px -3px rgba(0, 0, 0, 0.75);  
+}
+#openControls {
+  color: inherit;
+  align-self: baseline;
+}
+.showControls {
+  display: block;
 }
 .controlsWrapper {
   display: flex;
@@ -52,6 +60,10 @@
   min-width: 120px;
   display: flex;
   flex-direction: column;
+ 
+}
+.columnP:nth-child(2n) {
+   margin-left: 10px;
 }
 .contentStyle {
   padding: 15px 0;
@@ -61,7 +73,8 @@
   justify-content: space-between;
 }
 #name {
-  margin: 0;
+  margin: 0 0 20px 0;
+  max-width: 300px;
 }
 #toDeg {
   font-size: 12px;
@@ -73,10 +86,11 @@
 .shapePreview {
   display: flex;
   margin: auto;
-  margin-top: 5px
+  margin-top: 5px;
+  padding: 1px;
 }
 .active {
-  box-shadow: 0px 0px 10px 5px rgba(171,48,171,1); 
+  box-shadow: inset 0px 0px 1px 1px rgba(171,48,171, 0.5); 
 }
 .select {
   max-width: 100px;
@@ -84,6 +98,23 @@
   right: 150px;
   top: 10px;
 }
+
 input {
   margin-bottom: 15px; 
+ 
+}
+
+.colorizeInput {
+  margin-right: auto; 
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .imageList {
+    flex-direction: row;
+    overflow-x: auto;
+    height: auto;
+  }
 }
