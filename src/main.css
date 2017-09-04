@@ -35,12 +35,40 @@
   min-width: 100px;
   height: auto;
   left: 1%;
-  top: 2%;
+  top: 5%;
   box-shadow: 8px 5px 14px -3px rgba(0, 0, 0, 0.75);  
+  animation: toBottom .2s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
+@keyframes toBottom {
+   from {
+    margin-top: 100%;
+    height: 300%; 
+  }
+  to {
+    margin-top: 0%;
+    height: 100%;
+  }
+}
+
 #openControls {
   color: inherit;
   align-self: baseline;
+  margin-left: 7%;
+  font-size: inherit;
+ padding: 5px 15px 5px 30px;
+  border-radius: 2px;
+  background-color: transparent;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+}
+#openControls::after {
+  content: '\2699';
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  top: 2px;
+  left: 0;
 }
 .showControls {
   display: block;
@@ -113,8 +141,15 @@ input {
     flex-direction: column;
   }
   .imageList {
+    display: flex;
     flex-direction: row;
     overflow-x: auto;
-    height: auto;
+    height: 150px;
+  }
+  #openControls {
+    align-self: center;
+  }
+  .controls {
+    background: aliceblue;
   }
 }
