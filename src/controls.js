@@ -64,13 +64,14 @@ controls.forEach(control =>
       control !== colorize &&
       control !== canvasColor &&
       control !== rules &&
+      control !== axiom &&
       isNaN(control.value)
     ) {
       warning.innerHTML = 'provided value must be a number'
       return
     }
-    if (iterations.value > 15) {
-      warning.innerHTML = 'too many iterations, please use < 15'
+    if (iterations.value > 10) {
+      warning.innerHTML = 'too many iterations, please use < 10'
       return
     } else if (stepLength.value == '') {
       warning.innerHTML = 'pleace provide step value'
@@ -98,7 +99,6 @@ controls.forEach(control =>
   })
 )
 
-// dragging attempt
 let draggin = false
 const mouseCoord = {}
 canvas.addEventListener('mousedown', e => {

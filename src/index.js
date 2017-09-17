@@ -8,7 +8,32 @@ const state = {
   shapeColor: false
 }
 
-let tempObject
+let tempObject // store object
+
+// helper functions 
+
+const jsonToHTML = rules => {
+  let res = ''
+  const keys = Object.keys(rules)
+  keys.forEach(key => (res += `${key} => ${rules[key]}\n`))
+  return res
+}
+
+const htmlToJson = html => {
+  let res = {}
+  let stringsArr = html.trim().split('\n')
+  stringsArr.forEach(str => {
+    let rule = str.split('=>')
+    res[rule[0].trim()] = rule[1].trim()
+  })
+  return res
+}
+
+const degToRad = deg => Math.round(deg * Math.PI / 18) / 10
+const radToDeg = (rad = 0) => 180 * rad / Math.PI
+
+const setInitialState = () => cx.resetTransform()
+const clearCanvas = () => cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height)
 
 // Lshape container object
 
@@ -55,12 +80,15 @@ Lshape.prototype.iterate = function() {
   }
 }
 
+// Initial render
+
 const shapeNames = Object.keys(SHAPES)
 const randomShape = Math.ceil(Math.random() * shapeNames.length)
 const shape = new Lshape(
   SHAPES[shapeNames[randomShape - 1]],
   shapeNames[randomShape - 1]
 )
+
 shape.iterate()
 previewsArr.forEach(el => {
   if (el.getAttribute('data-id') == SHAPES[shapeNames[randomShape - 1]].id) {
@@ -68,25 +96,7 @@ previewsArr.forEach(el => {
   }
 })
 
-const jsonToHTML = rules => {
-  let res = ''
-  const keys = Object.keys(rules)
-  keys.forEach(key => (res += `${key} => ${rules[key]}\n`))
-  return res
-}
-
-const htmlToJson = html => {
-  let res = {}
-  let stringsArr = html.trim().split('\n')
-  stringsArr.forEach(str => {
-    let rule = str.split('=>')
-    res[rule[0].trim()] = rule[1].trim()
-  })
-  return res
-}
-
-const degToRad = deg => Math.round(deg * Math.PI / 18) / 10
-const radToDeg = (rad = 0) => 180 * rad / Math.PI
+// update controls
 
 const updateControls = (shape, now) => {
   stats.innerHTML = `The ${shape.name} rendered in ${Date.now() - now}ms`
@@ -106,9 +116,6 @@ const updateControls = (shape, now) => {
 //
 // DRAW
 //
-
-const setInitialState = () => cx.resetTransform()
-const clearCanvas = () => cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height)
 
 const draw = (shape, state, dragState) => {
   const now = Date.now()

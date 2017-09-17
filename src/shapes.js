@@ -1,8 +1,18 @@
 const canvas = document.getElementById('canvas')
 const cx = canvas.getContext('2d')
 
-canvas.height = document.body.offsetHeight - document.getElementById('download').offsetHeight - document.getElementById('stats').offsetHeight
+canvas.height =
+  document.body.offsetHeight -
+  document.getElementById('download').offsetHeight -
+  document.getElementById('stats').offsetHeight
 canvas.style.width = '900px'
+
+if (document.body.offsetWidth < 768) {
+  canvas.height = 500
+  canvas.width = 760
+  canvas.style.height = '500px'
+  canvas.style.width = '760px'
+}
 // constants
 
 const cHeight = cx.canvas.height
